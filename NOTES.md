@@ -59,6 +59,73 @@ Note: Use the same Google Client ID as in the backend configuration.
 ### Scrapy Setup
 The scrapy service requires the backend to be running as it communicates with it through GraphQL.
 
+I had some problems with running that. It needs a token that I first I thought needs to be generated from the caats app settings, but there's only "work in progress" in privacy and security tabs in the settings.
+
+One idea is to grant myself superuser priviliges in the database.
+```psql
+caats=> SELECT id, email, "isSuperuser" FROM "User";
+                  id                  |        email         | isSuperuser
+--------------------------------------+----------------------+-------------
+ 80ae4589-....-....-....-b9c90da3e100 | s33621@pjwstk.edu.pl | f
+(1 row)
+
+```
+we can see that isSuperuser is set to false for me
+update isSuperuser column to true:
+`caats=> UPDATE "User" SET "isSuperuser"=true WHERE id='80ae4589-....-....-....-b9c90da3e100';`
+
+now in the application settings on the frontend I got the superuser tab with a button "skopiuj token". lets work with that.
+in scrapy `.env` do:
+
+```env
+TOKEN="the token"
+NEST_GRAPHQL="http://localhost:3000/graphql"
+```
+
+now we should be able to build the scraper.
+run `yarn build` and got this error:
+```bash
+prybiec@m1chine:~/fun/caats/packages/scrapy$ yarn build
+yarn run v1.22.22
+$ tsc --noEmit && swc src/ -d dist/
+src/stealer.ts:50:18 - error TS18047: 'body' is possibly 'null'.
+
+50       pageBody = body.removeWhitespace().toString() // sanitization
+                    ~~~~
+
+
+Found 1 error in src/stealer.ts:50
+
+error Command failed with exit code 2.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+```
+added this check before:
+```ts
+if (!body) throw new Error('RadAjaxPanel1 element not found')
+```
+it builds fine now.
+
+run this command `yarn scrapy steal --api "http://localhost:3000/graphql" --rate 30`:
+```bash
+prybiec@m1chine:~/fun/caats/packages/scrapy$ yarn scrapy steal --api "http://localhost:3000/graphql" --rate 30
+yarn run v1.22.22
+$ swc src/ -d dist/
+Successfully compiled: 3 files with swc (68.45ms)
+$ node dist/index.js steal --api http://localhost:3000/graphql --rate 30
+Starting Stealer...
+{ fullTask: undefined }
+Task succeeded! o((>ω< ))o
+{ fullTask: undefined }
+Task succeeded! o((>ω< ))o
+{ fullTask: undefined }
+
+```
+succeeded but task undefined... hmm lets whether the calendar works properly now.
+
+running graphql scripts in graphql console doesnt do much either. i get "unauthorized" or "successful" message but the scraper never works.
+
+
+at this point i don't know if there's some fault on my end or the `https://planzajec.pjwstk.edu.pl/PlanOgolny3.aspx` because it's empty for this week.
 ## Running the Development Environment
 
 Each package can be run independently in development mode:
