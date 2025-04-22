@@ -246,4 +246,28 @@ Common Issues and Solutions:
    - Make sure you've added your email as a test user in the OAuth consent screen
    - Try clearing your browser cookies and cache
 
-Would you like me to explain any of these steps in more detail or help troubleshoot any issues you encounter?
+
+
+## Configure meili search
+after starting up nest backend with `yarn dev` i got error that `MEILI_URL` key doesnt exist in the configuration, let's set it up:
+
+```bash
+brew install meilisearch
+
+# generate random key
+openssl rand -base64 32
+
+meilisearch --master-key="generated key"
+```
+by default it will run on `http://localhost:7700`.
+
+Add these Meilisearch configurations to the nest `.env` file:
+```
+MEILI_URL="http://localhost:7700"
+MEILI_MASTER_KEY="the-key-you-generated"  # The same key you used to start Meilisearch
+```
+
+check service status with:
+```bash
+curl http://localhost:7700/health
+```
