@@ -4,5 +4,4 @@ node_modules/
 *.log
 
 # dev, can be removed later
-*-lock.yaml
 data.ms

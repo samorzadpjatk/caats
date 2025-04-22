@@ -47,7 +47,7 @@ I also needed to add this to the `.env` file:
 MEILI_URL="http://localhost:7700"
 MEILI_MASTER_KEY="" # your master key
 ```
-more about [meili search](#configure)
+more about [meili search](#configure-meili-search)
 ### Frontend (app) Setup
 1. Navigate to the `packages/app` directory
 2. Create a `.env` file:
@@ -189,6 +189,7 @@ yarn scrapy
    ```
 7. Click "Create"
 8. You'll get a popup with your credentials. Save both the **Client ID** and **Client Secret**
+
 ## Configure meili search
 after starting up nest backend with `yarn dev` i got error that `MEILI_URL` key doesnt exist in the configuration, let's set it up:
 

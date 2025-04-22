@@ -38,7 +38,7 @@ import { MeilisearchModule } from './meilisearch/meilisearch.module'
       typePaths: ['./**/*.{gql,graphql}'],
       typeDefs,
       resolvers,
-      // playground: true,
+      playground: false, // NOTE: i think this is a developement only change
       // installSubscriptionHandlers: true,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
       introspection: true,
