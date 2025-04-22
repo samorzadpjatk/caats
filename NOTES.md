@@ -1,6 +1,6 @@
 # CaaTS - Development Setup Guide
 
-CaaTS consis of three main components:
+CaaTS consists of three main components:
 - `app`: Frontend React application
 - `nest`: Backend NestJS server
 - `scrapy`: Data scraping service
@@ -42,6 +42,12 @@ JWT_SECRET="your-generated-jwt-secret"  # Generate using: node -e "console.log(r
 BASE_URL="http://127.0.0.1:3000"
 ```
 
+I also needed to add this to the `.env` file:
+```env
+MEILI_URL="http://localhost:7700"
+MEILI_MASTER_KEY="" # your master key
+```
+more about [meili search](#configure)
 ### Frontend (app) Setup
 1. Navigate to the `packages/app` directory
 2. Create a `.env` file:
@@ -133,25 +139,25 @@ yarn scrapy
 ## Google Cloud OAuth Configuration
 1. **Create a Google Cloud Project**
 
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Click on the project dropdown at the top of the page
-3. Click "New Project"
-4. Name it something like "CaaTS Development"
-5. Click "Create"
+2. Go to [Google Cloud Console](https://console.cloud.google.com/)
+3. Click on the project dropdown at the top of the page
+4. Click "New Project"
+5. Name it something like "CaaTS Development"
+6. Click "Create"
 
-2. **Enable OAuth 2.0 API**
+7. **Enable OAuth 2.0 API**
 
-1. In the left sidebar, go to "APIs & Services" > "Library"
-2. Search for "OAuth"
-3. Click on "OAuth 2.0" or "Google OAuth2 API"
-4. Click "Enable"
+8. In the left sidebar, go to "APIs & Services" > "Library"
+9. Search for "OAuth"
+10. Click on "OAuth 2.0" or "Google OAuth2 API"
+11. Click "Enable"
 
-3. **Configure OAuth Consent Screen**
+12. **Configure OAuth Consent Screen**
 
-1. In the left sidebar, go to "APIs & Services" > "OAuth consent screen"
-2. Select "External" user type (this is fine for development)
-3. Click "Create"
-4. Fill in the required information:
+13. In the left sidebar, go to "APIs & Services" > "OAuth consent screen"
+14. Select "External" user type (this is fine for development)
+15. Click "Create"
+16. Fill in the required information:
    ```
    App name: CaaTS Development
    User support email: [your email]
@@ -165,13 +171,13 @@ yarn scrapy
    - Click "Save and Continue"
 8. Review the summary and click "Back to Dashboard"
 
-4. **Create OAuth 2.0 Credentials**
+9. **Create OAuth 2.0 Credentials**
 
-1. In the left sidebar, go to "APIs & Services" > "Credentials"
-2. Click "Create Credentials" > "OAuth client ID"
-3. Choose "Web application"
-4. Name it "CaaTS Local Development"
-5. Under "Authorized JavaScript origins", add:
+10. In the left sidebar, go to "APIs & Services" > "Credentials"
+11. Click "Create Credentials" > "OAuth client ID"
+12. Choose "Web application"
+13. Name it "CaaTS Local Development"
+14. Under "Authorized JavaScript origins", add:
    ```
    http://localhost:5173
    http://localhost:3000
@@ -183,71 +189,6 @@ yarn scrapy
    ```
 7. Click "Create"
 8. You'll get a popup with your credentials. Save both the **Client ID** and **Client Secret**
-
-5. **Configure Your Local Environment**
-
-1. In the `packages/nest` directory, create `.env` file:
-```bash
-cd packages/nest
-cp .example.env .env
-```
-
-2. Edit the `.env` file with your credentials:
-```env
-DATABASE_URL="postgres://dev:dev@localhost:5432/caats"
-GOOGLE_CLIENT_ID="your-client-id-here"
-GOOGLE_SECRET="your-client-secret-here"
-JWT_SECRET="generate-this-in-next-step"
-BASE_URL="http://localhost:3000"
-```
-
-3. Generate JWT_SECRET by running this command in terminal:
-```bash
-node -e "console.log(require('crypto').randomBytes(128).toString('base64url'))"
-```
-Copy the output into your `.env` file as the JWT_SECRET value.
-
-4. In the `packages/app` directory, create `.env` file:
-```bash
-cd ../app
-echo "VITE_GOOGLE_CLIENTID=your-client-id-here" > .env
-```
-Use the same Client ID as in the backend configuration.
-
-6. **Verify Setup**
-
-1. Start your PostgreSQL database (from my previous instructions)
-2. Start the backend:
-```bash
-cd ../nest
-yarn dev
-```
-
-3. In a new terminal, start the frontend:
-```bash
-cd ../app
-yarn dev
-```
-
-4. Visit `http://localhost:5173` in your browser
-5. Try to log in - you should be able to use your Google account (the one you added as a test user)
-
-Common Issues and Solutions:
-
-1. **"Error: redirect_uri_mismatch"**
-   - Double-check your authorized redirect URIs in Google Cloud Console
-   - Make sure they exactly match what's being used in the application
-
-2. **"Error: invalid_client"**
-   - Verify your GOOGLE_CLIENT_ID and GOOGLE_SECRET are correctly copied
-   - Make sure there are no extra spaces or quotes in your .env files
-
-3. **"Error: access_denied"**
-   - Make sure you've added your email as a test user in the OAuth consent screen
-   - Try clearing your browser cookies and cache
-
-
-
 ## Configure meili search
 after starting up nest backend with `yarn dev` i got error that `MEILI_URL` key doesnt exist in the configuration, let's set it up:
 
