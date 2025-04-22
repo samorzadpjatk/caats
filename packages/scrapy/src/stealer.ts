@@ -47,6 +47,7 @@ export class Stealer {
     } else {
       console.log('Date is already set.')
       const body = parse(pageBody).getElementById('RadAjaxPanel1')
+      if (!body) throw new Error('RadAjaxPanel1 element not found')
       pageBody = body.removeWhitespace().toString() // sanitization
     }
 
