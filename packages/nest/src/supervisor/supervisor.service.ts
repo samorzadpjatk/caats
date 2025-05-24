@@ -119,6 +119,7 @@ export class SupervisorService implements OnModuleInit {
     if (
       candidate.ctl06_TypZajecLabel?.value !== 'Wykład' &&
       candidate.ctl06_TypZajecLabel?.value !== 'Ćwiczenia' &&
+      candidate.ctl06_TypZajecLabel?.value !== 'Lektorat' &&
       candidate.ctl06_TypRezerwacjiLabel?.value !== 'egzamin'
     ) {
       return 'dropped'

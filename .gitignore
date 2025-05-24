@@ -5,3 +5,4 @@ node_modules/
 
 # dev, can be removed later
 data.ms
+.DS_Store
