@@ -9,7 +9,8 @@ import {
 } from '@nestjs/common';
 
 import { RestService } from '../rest.service';
-import { AuthGuard } from '../guards/auth.guard';
+import { AuthGuard } from '../../auth/auth.guard';
+import { EventsQueryDto, ScheduleEventDto } from '../dtos';
 
 /*
 IMPORTANT NOTE: 
@@ -19,33 +20,6 @@ that interacts with the user service and handles user data.
 The current implementation is just a stub to demonstrate the structure
 and how the controller should look like.
 */
-
-class UpdateGroupsDto {
-    groups: string[];
-}
-
-class EventsQueryDto {
-    since?: string;
-    until?: string;
-    skip?: number;
-    take?: number;
-}
-
-export interface ScheduleEventDto {
-  id: string;
-  code: string;
-  subject: string;
-  type: string;
-  startsAt: string;
-  endsAt: string;
-  groups: string[];
-  hosts: string[];
-  room?: string;
-  /** Source of the event */
-  //source: GqlEventSource;
-  previous?: ScheduleEventDto;
-  next?: ScheduleEventDto;
-}
 
 
 @Controller('api/user')
