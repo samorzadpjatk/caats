@@ -5,12 +5,13 @@ import {
     UseGuards, 
     Get,
     Put,
-    Post
+    Post,
+    Query
 } from '@nestjs/common';
 
 import { RestService } from '../rest.service';
 import { AuthGuard } from '../../auth/auth.guard';
-import { EventsQueryDto, ScheduleEventDto } from '../dtos';
+import { EventsQueryDto, ScheduleEventDto, UpdateGroupsDto } from '../dtos';
 
 /*
 IMPORTANT NOTE: 
@@ -57,7 +58,7 @@ export class UserController {
 
     @UseGuards(AuthGuard)
     @Get('me/events')
-    async getEvents(@Request() req, @Body() queryDto: EventsQueryDto) {
+    async getEvents(@Request() req, @Query() query: EventsQueryDto) {
         try {
             // todo: after linking user service do logic here
             return this.restService.createResponse<ScheduleEventDto[]>(
