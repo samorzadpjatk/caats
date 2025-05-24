@@ -12,7 +12,7 @@ import {
 
 import { RestService } from '../rest.service';
 import { AuthGuard } from '../../auth/auth.guard';
-import { EventsQueryDto, ScheduleEventDto, SearchQueryDto } from '../dtos';
+import { EventsQueryDto, ScheduleEventDto } from '../dtos';
 
 /*
 IMPORTANT NOTE: 
