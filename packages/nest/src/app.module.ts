@@ -15,6 +15,7 @@ import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo'
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'
 import { PubsubModule } from './pubsub/pubsub.module'
 import { MeilisearchModule } from './meilisearch/meilisearch.module'
+import { RestModule } from './rest/rest.module'
 
 @Module({
   imports: [
@@ -55,6 +56,7 @@ import { MeilisearchModule } from './meilisearch/meilisearch.module'
     IcsModule,
     PubsubModule,
     MeilisearchModule,
+    RestModule,
   ],
   providers: [AppResolver],
 })
