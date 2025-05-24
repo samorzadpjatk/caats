@@ -1,14 +1,16 @@
-class GoogleAuthDto {
+export interface GoogleAuthDto {
     code: string;
 }
 
-class UpdateGroupsDto {
+export interface UpdateGroupsDto {
     groups: string[];
 }
 
-class EventsQueryDto {
+export interface EventsQueryDto {
+    groups?: string[];
+    hosts?: string[];
     since?: string;
-    until?: string;
+    unitl?: string;
     skip?: number;
     take?: number;
 }
@@ -28,3 +30,18 @@ export interface ScheduleEventDto {
   previous?: ScheduleEventDto;
   next?: ScheduleEventDto;
 }
+
+export interface TasksBulkDto {
+    count: number;
+    offset?: number;
+}
+
+export interface TaskStateDto {
+  state: 'PENDING' | 'RUNNING' | 'SUCCESS' | 'FAILED' | 'CANCELLED' | 'SKIPPED' | 'OUTDATED';
+}
+
+export interface FinishTaskDto {
+    hash: string;
+    result: string[], // maybe taskState?
+    scraperId?: string;
+} 
