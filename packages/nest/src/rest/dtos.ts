@@ -64,6 +64,19 @@ export interface StoredTaskDto {
     status: string;
 }
 
+export interface TaskDto {
+  date: Scalars['String'];
+  hash?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+};
+
+export type CurrentTaskDto = {
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ID'];
+  status: TaskStateDto;
+  targetDate: Scalars['Date'];
+};
+
 export interface TasksBulkDto {
     count: number;
     offset?: number;
@@ -85,3 +98,15 @@ export interface ScraperDto {
     lastSeen?: Scalars['DateTime'];
     state: string;
 }
+
+export interface CreateScraperDto {
+    name: string;
+}
+
+export interface WorkingScraperDto {
+  alias: Scalars['String'];
+  currentTask?: Maybe<CurrentTaskDto>;
+  id: Scalars['ID'];
+  lastSeen: Scalars['DateTime'];
+  state: Scalars['String'];
+};
