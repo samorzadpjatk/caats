@@ -8,7 +8,7 @@ import { EventController } from './controllers/event.controller'
 import { GroupController } from './controllers/group.controller'
 import { TaskController } from './controllers/task.controller'
 import { ScraperController } from './controllers/scraper.controller'
-import { SourceController } from './controllers/source.controller'
+import { SourceController } from './controllers/sources.controller'
 import { CalendarController } from './controllers/calendar.controller'
 import { AppController } from './controllers/app.controller'
 

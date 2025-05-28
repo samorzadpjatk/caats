@@ -129,3 +129,11 @@ export interface WorkingScraperDto {
   lastSeen: Scalars['DateTime']
   state: Scalars['String']
 }
+
+export interface EventSource {
+  createdAt: Scalars['DateTime']
+  id: Scalars['ID']
+  object: Scalars['JSON']
+  task: StoredTaskDto
+  //constantId: Scalars['String']
+}
