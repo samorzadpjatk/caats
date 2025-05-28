@@ -43,7 +43,7 @@ describe('SupervisorService', () => {
 
   it('store result', async () => {
     const result = await readFile('./test/assets/apbd.html').then((f) =>
-      f.toString()
+      f.toString(),
     )
     prisma.task.findFirstOrThrow.mockResolvedValueOnce({
       id: 0,
@@ -65,8 +65,8 @@ describe('SupervisorService', () => {
             id: 1,
             object: args.data.object,
             taskId: args.data.taskId ?? 0,
-          })
-        )
+          }),
+        ),
     )
     await supervisor.storeTaskResult(0, 'None', [result])
   })

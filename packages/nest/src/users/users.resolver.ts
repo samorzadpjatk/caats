@@ -18,7 +18,7 @@ export class UsersResolver {
   @Mutation()
   async setGroups(
     @Context('user') user: User,
-    @Args('groups') groups: string[]
+    @Args('groups') groups: string[],
   ) {
     await this.users.updateUser(user.id, { groups })
     return true

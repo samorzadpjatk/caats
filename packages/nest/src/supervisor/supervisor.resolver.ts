@@ -30,14 +30,14 @@ import { PubsubService } from '../pubsub/pubsub.service'
 export class SupervisorResolver {
   constructor(
     private readonly supervisor: SupervisorService,
-    private readonly pubsub: PubsubService
+    private readonly pubsub: PubsubService,
   ) {}
 
   @UseGuards(ScraperGuard)
   @Mutation()
   async updateTaskState(
     @Args('id', ParseIntPipe) id: number,
-    @Args('state') state: TaskStatus
+    @Args('state') state: TaskStatus,
   ) {
     await this.supervisor.updateTaskState(id, state)
     return true
@@ -48,7 +48,7 @@ export class SupervisorResolver {
   async finishTask(
     @Args('id', ParseIntPipe) id: number,
     @Args('result') { hash, result }: GqlTaskResult,
-    @Context('scraper') scraper: Scraper
+    @Context('scraper') scraper: Scraper,
   ) {
     await this.supervisor.storeTaskResult(id, hash, result, scraper?.id)
     return true
@@ -69,7 +69,7 @@ export class SupervisorResolver {
       ['newTask', scraper.id, scraper.ownerId],
       () => {
         this.supervisor.updateScraper(scraper.id, 'DISCONNECTED')
-      }
+      },
     )
 
     setTimeout(async () => {
@@ -84,7 +84,7 @@ export class SupervisorResolver {
   @Mutation()
   async createScraper(
     @Args() args: GqlMutationCreateScraperArgs,
-    @Context('user') user: User
+    @Context('user') user: User,
   ) {
     const [, token] = await this.supervisor.createScraper(user.id, args.name)
     return token

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common'
 
 @Injectable()
 export class RestService {
@@ -10,15 +10,15 @@ export class RestService {
       success,
       message,
       data,
-    };
+    }
   }
 
   // error response helper
-  createErrorResponse(message: string, statusCode: number = 400) {
+  createErrorResponse(message: string, statusCode = 400) {
     return {
       success: false,
       message,
       statusCode,
-    };
+    }
   }
-} 
+}

@@ -31,11 +31,11 @@ describe('ParserService', () => {
   it('load html files', async () => {
     const assetsPath = './test/assets'
     const assets = await readDir('./test/assets').then((f) =>
-      f.filter((x) => x.match(/^.+[.]html$/))
+      f.filter((x) => x.match(/^.+[.]html$/)),
     )
     const htmlFiles = assets.map((f) => path.join(assetsPath, f))
     sources = await Promise.all(
-      htmlFiles.map((p) => readFile(p).then((c) => c.toString()))
+      htmlFiles.map((p) => readFile(p).then((c) => c.toString())),
     )
   })
 

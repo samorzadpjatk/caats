@@ -15,7 +15,7 @@ import { JwtPayload } from './auth.service'
 export class AuthGuard implements CanActivate {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly prisma: PrismaService
+    private readonly prisma: PrismaService,
   ) {}
 
   async canActivate(execCtx: ExecutionContext): Promise<boolean> {
@@ -78,7 +78,7 @@ export class SuperuserGuard implements CanActivate {
 export class ScraperGuard implements CanActivate {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly prisma: PrismaService
+    private readonly prisma: PrismaService,
   ) {}
 
   async canActivate(execCtx: ExecutionContext): Promise<boolean> {

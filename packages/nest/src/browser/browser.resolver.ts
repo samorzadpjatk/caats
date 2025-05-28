@@ -7,7 +7,7 @@ import { BrowserService } from './browser.service'
 export class BrowserResolver {
   constructor(
     private readonly browser: BrowserService,
-    private readonly prisma: PrismaService
+    private readonly prisma: PrismaService,
   ) {}
 
   @Query()
