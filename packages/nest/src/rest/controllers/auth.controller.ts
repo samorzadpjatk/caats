@@ -1,11 +1,7 @@
 import { Controller, Post, Body } from '@nestjs/common'
 
 import { RestService } from '../rest.service'
-
-// TOOD: probably in a separate file
-class GoogleAuthDto {
-  code: string
-}
+import { GoogleAuthDto } from '../dtos'
 
 @Controller('api/auth')
 export class AuthController {
