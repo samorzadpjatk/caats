@@ -15,13 +15,13 @@ export class IcsResolver {
   async createSubscription(
     @Context('user') user: User,
     @Args() { options }: GqlMutationCreateSubscriptionArgs,
-    @Context('req') request: FastifyRequest
+    @Context('req') request: FastifyRequest,
   ) {
     const signature = await this.ics.createSignedSubscription(
       options.user
         ? { ...options, user: { id: user.id } }
         : { ...options, user: undefined },
-      user
+      user,
     )
 
     const fullUrl = new URL(request.headers.origin)

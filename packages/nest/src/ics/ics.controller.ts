@@ -19,15 +19,14 @@ export class IcsController {
     private readonly ics: IcsService,
     private readonly jwt: JwtService,
     private readonly prisma: PrismaService,
-    private readonly config: ConfigService
+    private readonly config: ConfigService,
   ) {}
 
   @Get('cal.ics')
   @Header('Content-Type', 'text/calendar; charset=utf-8')
   async getCalForSignature(@Query('signature') signature: string) {
-    const options: SignedSubscriptionOptions = await this.jwt.verifyAsync(
-      signature
-    )
+    const options: SignedSubscriptionOptions =
+      await this.jwt.verifyAsync(signature)
     return await this.ics.readSignedSubscription(options)
   }
 
@@ -35,7 +34,7 @@ export class IcsController {
   @Redirect('ics/cal.ics', 308)
   async redirectResolvedShortcut(
     @Request() request: FastifyRequest,
-    @Param('shortcut') shortcut: string
+    @Param('shortcut') shortcut: string,
   ) {
     const { jwt } = await this.prisma.icsShortcuts.findUniqueOrThrow({
       where: {
@@ -48,7 +47,7 @@ export class IcsController {
 
     const redirectUrl = new URL(
       '/ics/cal.ics',
-      this.config.getOrThrow('BASE_URL')
+      this.config.getOrThrow('BASE_URL'),
     )
     redirectUrl.searchParams.set('signature', jwt)
 

@@ -18,12 +18,12 @@ export class IcsService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly jwt: JwtService,
-    private readonly config: ConfigService
+    private readonly config: ConfigService,
   ) {}
 
   async createSignedSubscription(
     options: SignedSubscriptionOptions,
-    user?: Pick<User, 'id'>
+    user?: Pick<User, 'id'>,
   ) {
     const token = await this.jwt.signAsync(options)
 
@@ -85,7 +85,7 @@ export class IcsService {
       const lastModified = DateTime.fromJSDate(event.createdAt)
       const url = new URL(
         `/app/event/${event.id}`,
-        this.config.getOrThrow('BASE_URL')
+        this.config.getOrThrow('BASE_URL'),
       )
 
       return {

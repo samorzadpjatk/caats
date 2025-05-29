@@ -27,7 +27,7 @@ export class ParserService {
 
   convertRawObjectToEvent(
     sourceId: number,
-    rawObject: Record<string, { value?: string; humanKey: string }>
+    rawObject: Record<string, { value?: string; humanKey: string }>,
   ) {
     const {
       ctl06_DataZajecLabel: date,
@@ -43,11 +43,11 @@ export class ParserService {
 
     const startsAt = this.combineStringsToDateTime(
       timeStart.value,
-      date.value
+      date.value,
     ).toJSDate()
     const endsAt = this.combineStringsToDateTime(
       timeEnd.value,
-      date.value
+      date.value,
     ).toJSDate()
 
     return {
@@ -71,7 +71,7 @@ export class ParserService {
 
   convertRawObjectReservationToEvent(
     sourceId: number,
-    rawObject: Record<string, { value?: string; humanKey: string }>
+    rawObject: Record<string, { value?: string; humanKey: string }>,
   ) {
     const {
       ctl06_DataZajecLabel: date,
@@ -87,11 +87,11 @@ export class ParserService {
 
     const startsAt = this.combineStringsToDateTime(
       timeStart.value,
-      date.value
+      date.value,
     ).toJSDate()
     const endsAt = this.combineStringsToDateTime(
       timeEnd.value,
-      date.value
+      date.value,
     ).toJSDate()
 
     return {

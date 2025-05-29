@@ -22,7 +22,7 @@ export class ScheduleEventResolver {
   @ResolveField()
   next(
     @Context('user') user: User | undefined,
-    @Parent() event: TimetableEvent
+    @Parent() event: TimetableEvent,
   ) {
     if (user) {
       return this.browser.findNextToEvent(user, event)
@@ -33,7 +33,7 @@ export class ScheduleEventResolver {
   @ResolveField()
   previous(
     @Context('user') user: User | undefined,
-    @Parent() event: TimetableEvent
+    @Parent() event: TimetableEvent,
   ) {
     if (user) {
       return this.browser.findPreviousToNext(user, event)

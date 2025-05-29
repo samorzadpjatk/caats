@@ -9,7 +9,10 @@ type ScheduleFindOptions = GqlScheduleInput &
 
 @Injectable()
 export class BrowserService {
-  constructor(private readonly prisma: PrismaService, private readonly meili: MeilisearchService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly meili: MeilisearchService,
+  ) {}
 
   private async returnGroups(options: ScheduleFindOptions) {
     if (options.user) {
@@ -93,7 +96,7 @@ export class BrowserService {
 
   async findNextToEvent(
     user: Pick<User, 'id'>,
-    event: Pick<TimetableEvent, 'endsAt'>
+    event: Pick<TimetableEvent, 'endsAt'>,
   ) {
     const { groups } = await this.returnGroups({ user })
 
@@ -114,7 +117,7 @@ export class BrowserService {
 
   async findPreviousToNext(
     user: Pick<User, 'id'>,
-    event: Pick<TimetableEvent, 'startsAt'>
+    event: Pick<TimetableEvent, 'startsAt'>,
   ) {
     const { groups } = await this.returnGroups({ user })
 

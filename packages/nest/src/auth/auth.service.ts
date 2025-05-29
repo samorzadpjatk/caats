@@ -21,7 +21,7 @@ export class AuthService {
     private readonly jwt: JwtService,
     private readonly users: UsersService,
     private readonly config: ConfigService,
-    private readonly prisma: PrismaService
+    private readonly prisma: PrismaService,
   ) {
     this.googleAuth = new OAuth2Client({
       clientId: this.config.getOrThrow('GOOGLE_CLIENT_ID'),
@@ -44,7 +44,7 @@ export class AuthService {
     return await this.users.createUserIfNotExists(
       data.email,
       data.name,
-      data.picture
+      data.picture,
     )
   }
 
